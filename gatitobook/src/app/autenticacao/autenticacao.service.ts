@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+// @Injectable indica que a classe pode ser injetada em algum outro serviço
+// Transforma o objeto em um Singleton.
 @Injectable({
   providedIn: 'root',
 })
