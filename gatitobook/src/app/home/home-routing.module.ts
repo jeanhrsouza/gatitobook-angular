@@ -1,3 +1,4 @@
+import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
@@ -10,7 +11,11 @@ const routes: Routes = [
     children: [
       {
         path: '', //path vazio por login ser default
-        component: LoginComponent
+        component: LoginComponent,
+      },
+      {
+        path:"novousuario",
+        component: NovoUsuarioComponent,
       },
     ],
   },
@@ -18,6 +23,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}
