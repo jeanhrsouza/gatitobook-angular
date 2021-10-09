@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { minusculoValidator } from './minusculo.validator';
 import { NovoUsuario } from './novo-usuario';
 import { NovoUsuarioService } from './novo-usuario.service';
@@ -17,7 +18,8 @@ export class NovoUsuarioComponent implements OnInit {
   //injetando o servico
   constructor(
     private formBuilder: FormBuilder,
-    private novoUsuarioService: NovoUsuarioService
+    private novoUsuarioService: NovoUsuarioService,
+    private router: Router
   ) {}
 
   //O ngOnInit é executado após a classe injetar todo o servico;
@@ -40,7 +42,15 @@ export class NovoUsuarioComponent implements OnInit {
       É retornado um objeto somente com o estado das variáveis carregadas
       da view que o usuário carregou
     */
-    const novoUsuario = this.novoUsuarioForm.getRawValue() as NovoUsuario;
-    console.log('Cadastrou');
+   if(this.novoUsuarioForm.valid) {
+     const novoUsuario = this.novoUsuarioForm.getRawValue() as NovoUsuario;
+      this.novoUsuarioService.cadastraNovoUsuario(novoUsuario).subscribe(() => {
+        this.router.navigate(['']);
+      },
+      (error) => {
+        console.log(error);
+      });
+   }
+
   }
 }
