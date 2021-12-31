@@ -2,7 +2,7 @@ import { AnimaisService } from './../animais.service';
 import { Animal } from './../animais';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalhe-animal',
@@ -19,7 +19,9 @@ export class DetalheAnimalComponent implements OnInit {
     private animaisService: AnimaisService,
 
     //ActivatedRoute é o serviço padrão utilizado para tratar das informações da rota.
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,5 +29,25 @@ export class DetalheAnimalComponent implements OnInit {
     this.animalId = this.activatedRoute.snapshot.params.animalId;
 
     this.animal$ = this.animaisService.buscaPorID(this.animalId);
+  }
+
+  curtir() {
+    this.animaisService.curtir(this.animalId).subscribe((curtida) => {
+      //Verificando se houve curtiva e recarregando as informações
+      if (curtida) {
+        this.animal$ = this.animaisService.buscaPorID(this.animalId);
+      }
+    });
+  }
+
+  excluir() {
+    this.animaisService.excluiAnimal(this.animalId).subscribe(
+      () => {
+        this.router.navigate(['/animais/']);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

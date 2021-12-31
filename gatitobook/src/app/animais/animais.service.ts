@@ -31,7 +31,7 @@ export class AnimaisService {
   curtir(id: number): Observable<boolean> {
     // O 3ª parametro é para receber o status
     return this.http
-      .post(`${API}/photos/${id}/likes`, {}, { observe: 'response' })
+      .post(`${API}/photos/${id}/like`, {}, { observe: 'response' })
       .pipe(
         //mapTo: retornará true para o componente
         mapTo(true),
