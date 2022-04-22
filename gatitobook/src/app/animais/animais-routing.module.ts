@@ -1,3 +1,4 @@
+import { NovoAnimalComponent } from './novo-animal/novo-animal.component';
 import { ListaAnimaisResolver } from './lista-animais/lista-animais.resolver';
 import { DetalheAnimalComponent } from './detalhe-animal/detalhe-animal.component';
 import { ListaAnimaisComponent } from './lista-animais/lista-animais.component';
@@ -13,6 +14,10 @@ const routes: Routes = [
       // Assim, tendo acesso dos valores antes de carregar a página.
       animais: ListaAnimaisResolver,
     },
+  },
+  {
+    path: 'novo',
+    component: NovoAnimalComponent,
   },
   {
     path: ':animalId', //passando parametro pela barra

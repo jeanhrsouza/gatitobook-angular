@@ -41,4 +41,18 @@ export class AnimaisService {
         })
       );
   }
+
+  upload(descricao: string, permiteComentario: boolean, arquivo: File) {
+    //p/ enviar o arquivo, é necessário empacotar o objeto em tipo formData
+    const formData = new FormData();
+    formData.append('description', descricao);
+    formData.append('allowComments', permiteComentario ? 'true' : 'false');
+    formData.append('imageFile', arquivo);
+
+    return this.http.post(`${API}/photos/upload`, formData, {
+      //A cada passo da requisição, o angular fará um next reportando a etapa da requisição.
+      observe: 'events',
+      reportProgress: true,
+    });
+  }
 }
