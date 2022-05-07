@@ -5,11 +5,10 @@
         <button
           type="button"
           (click)="fileInput.click()"
-          class="btn btn primary"
+          class="btn btn-primary"
         >
           <i class="fa fa-image fa-4x align-middle"></i>
         </button>
-
         <input
           #fileInput
           type="file"
@@ -23,12 +22,10 @@
           *ngIf="!!formularioAnimal.get('file')?.errors?.required"
         ></app-mensagem>
       </div>
-
       <ng-template #previewImage>
-        <app-animal url="preview" title="Preview"></app-animal>
+        <app-animal [url]="preview" title="Preview"></app-animal>
       </ng-template>
     </div>
-
     <div class="col-md-6">
       <div class="form-group">
         <textarea
@@ -49,21 +46,23 @@
         </label>
       </div>
 
-      <div *ngIf="!!percentualConcluido; else uploaddiv">
+      <div *ngIf="!percentualConcluido; else uploaddiv">
         <button
           [disabled]="formularioAnimal.invalid"
           type="submit"
           class="btn btn-primary btn-block"
-        ></button>
+        >
+          Enviar
+        </button>
 
-        <a [routerLink]="['animais']" class="btn btn-secondary btn-block"
+        <a routerLink="['animais']" class="btn btn-secondary btn-block"
           >Cancelar</a
         >
       </div>
 
       <ng-template #uploaddiv>
         <div class="text-center display-4">
-          Percentual de uplaod {{ percentualConcluido }} %
+          Percentual de upload {{ percentualConcluido }} %
         </div>
       </ng-template>
     </div>
